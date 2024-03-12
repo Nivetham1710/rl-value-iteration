@@ -17,11 +17,12 @@ S - (Starting state): The initial position of the agent.
 Intermediate states: Grid cells forming a layout that the agent must traverse.
 ## Actions:
 The agent can take 4 actions in each state:
-
+~~~
 LEFT
 RIGHT
 UP
 DOWN
+~~~
 ## Transition Probabilities:
 The environment is stochastic, meaning that the outcome of an action is not always certain.
 
@@ -37,7 +38,6 @@ The episode terminates when the agent reaches the goal state (G) or falls into a
 ![output](./4.png)
 
 ## VALUE ITERATION ALGORITHM
-VALUE ITERATION ALGORITHM
 Value iteration is a method of computing an optimal MDP policy and its value.
 It begins with an initial guess for the value function, and iteratively updates it towards the optimal value function, according to the Bellman optimality equation.
 The algorithm is guaranteed to converge to the optimal value function, and in the process of doing so, also converges to the optimal policy.
@@ -59,7 +59,7 @@ Return the optimal policy and the optimal value function.
 
 ## VALUE ITERATION FUNCTION
 ~~~
-python
+
 def value_iteration(P, gamma=1.0, theta=1e-10):
     V = np.zeros(len(P), dtype=np.float64)
     while True:
