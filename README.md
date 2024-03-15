@@ -6,37 +6,6 @@ To develop a Python program to find the optimal policy for the given MDP using t
 ## PROBLEM STATEMENT
 The FrozenLake environment in OpenAI Gym is a gridworld problem that challenges reinforcement learning agents to navigate a slippery terrain to reach a goal state while avoiding hazards. Note that the environment is closed with a fence, so the agent cannot leave the gridworld.
 
-## States:
-5 Terminal States:
-
-G - (Goal): The state the agent aims to reach.
-H - (Hole): A hazardous state that the agent must avoid at all costs.
-11 Non-Terminal States:
-
-S - (Starting state): The initial position of the agent.
-Intermediate states: Grid cells forming a layout that the agent must traverse.
-## Actions:
-The agent can take 4 actions in each state:
-~~~
-LEFT
-RIGHT
-UP
-DOWN
-~~~
-## Transition Probabilities:
-The environment is stochastic, meaning that the outcome of an action is not always certain.
-
-33.33% chance of moving in the intended direction.
-66.66% chance of moving in a orthogonal directions. This uncertainty adds complexity to the agent's navigation.
-## Rewards:
-+1 for reaching the goal state(G).
-0 reward for all other states, including the starting state (S) and intermediate states.
-## Episode Termination:
-The episode terminates when the agent reaches the goal state (G) or falls into a hole (H).
-
-## Graphical Representation:
-![output](./4.png)
-
 ## VALUE ITERATION ALGORITHM
 Value iteration is a method of computing an optimal MDP policy and its value.
 It begins with an initial guess for the value function, and iteratively updates it towards the optimal value function, according to the Bellman optimality equation.
@@ -60,6 +29,18 @@ Return the optimal policy and the optimal value function.
 ## VALUE ITERATION FUNCTION
 ~~~
 
+NAME:Nivetha M
+REGISTER NUMBER:212221240034
+
+## Code for Goal state as (3,0) with state number as 12
+desc=['SFHF','FFFH','FFHF','GFFH']
+env=gym.make('FrozenLake-v1',desc=desc)
+init_state=env.reset()
+goal_state=12
+P=env.env.P
+init_state
+
+## Value Iteration Algorithm
 def value_iteration(P, gamma=1.0, theta=1e-10):
     V = np.zeros(len(P), dtype=np.float64)
     while True:
@@ -68,19 +49,23 @@ def value_iteration(P, gamma=1.0, theta=1e-10):
         for a in range(len(P[s])):
           for prob,next_state,reward,done in P[s][a]:
             Q[s][a]+=prob*(reward+gamma*V[next_state]*(not done))
-      if(np.max(np.abs(V-np.max(Q,axis=1))))<theta:
+      if np.max(np.abs(V-np.max(Q,axis=1)))<theta:
         break
       V=np.max(Q,axis=1)
-    pi=lambda s:{s:a for s , a in enumerate(np.argmax(Q,axis=1))}[s]
+    pi=lambda s:{s:a for s,a in enumerate(np.argmax(Q,axis=1))}[s]
     return V, pi
+OUTPUT:
 ~~~
 
 ## OUTPUT:
 ## Optimal Policy:
-![output](./a1.png)
+![image](https://github.com/Nivetham1710/rl-value-iteration/assets/94155183/c664c350-4bc4-4c67-b074-5d2d8e3223bb)
+
 ## Optimal Value Function:
-![output](./a2.png)
+![image](https://github.com/Nivetham1710/rl-value-iteration/assets/94155183/6006c10e-cf7e-44cd-8ba7-d1a18f11fb85)
+
 ## Success Rate for Optimal Policy:
-![output](./a3.png)
+![image](https://github.com/Nivetham1710/rl-value-iteration/assets/94155183/0c96b4bf-acc2-4c99-8895-4578e8a2e64a)
+
 ## RESULT:
 Thus, a Python program is developed to find the optimal policy for the given MDP using the value iteration algorithm.
