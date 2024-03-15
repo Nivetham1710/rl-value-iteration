@@ -12,18 +12,18 @@ It begins with an initial guess for the value function, and iteratively updates 
 The algorithm is guaranteed to converge to the optimal value function, and in the process of doing so, also converges to the optimal policy.
 The algorithm is as follows:
 
-Initialize the value function V(s) arbitrarily for all states s.
-Repeat until convergence:
+1. Initialize the value function V(s) arbitrarily for all states s.
+2. Repeat until convergence:
 Initialize aaction-value function Q(s, a) arbitrarily for all states s and actions a.
 For all the states s and all the action a of every state:
 Update the action-value function Q(s, a) using the Bellman equation.
 Take the value function V(s) to be the maximum of Q(s, a) over all actions a.
 Check if the maximum difference between Old V and new V is less than theta.
 Where theta is a small positive number that determines the accuracy of estimation.
-If the maximum difference between Old V and new V is greater than theta, then
+3. If the maximum difference between Old V and new V is greater than theta, then
 Update the value function V with the maximum action-value from Q.
 Go to step 2.
-The optimal policy can be constructed by taking the argmax of the action-value function Q(s, a) over all actions a.
+4. The optimal policy can be constructed by taking the argmax of the action-value function Q(s, a) over all actions a.
 Return the optimal policy and the optimal value function.
 
 ## VALUE ITERATION FUNCTION
@@ -54,7 +54,6 @@ def value_iteration(P, gamma=1.0, theta=1e-10):
       V=np.max(Q,axis=1)
     pi=lambda s:{s:a for s,a in enumerate(np.argmax(Q,axis=1))}[s]
     return V, pi
-OUTPUT:
 ~~~
 
 ## OUTPUT:
